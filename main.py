@@ -8,10 +8,12 @@ from sklearn.preprocessing import LabelEncoder
 
 warnings.filterwarnings("ignore")
 
-MODEL_DIR = 'trained_models'
+MODEL_DIR = 'Models'
 COLUMN_INFO_FILE = 'app_data.xlsx'
 PATIENT_FILE = 'patients.xlsx'
-TARGETS = ['Diagnosis', 'Management', 'Severity']
+TARGETS = ['Diagnosis', 
+           'Management', 
+           'Severity']
 
 #pré-processamento
 def preprocess_input(input_series, reference_df, expected_columns, targets, full_column_list):
@@ -74,21 +76,21 @@ def load_models():
         return {
             'diagnosis': {
                 'model': joblib.load(f"{MODEL_DIR}/diagnosis_model.joblib"),
-                'le': joblib.load(f"{MODEL_DIR}/le_diagnosis.joblib")
+                'le': joblib.load(f"{MODEL_DIR}/leDiagnosis.joblib")
             },
             'management': {
                 'model': joblib.load(f"{MODEL_DIR}/management_model.joblib"),
-                'le': joblib.load(f"{MODEL_DIR}/le_management.joblib")
+                'le': joblib.load(f"{MODEL_DIR}/leManagement.joblib")
             },
             'severity': {
                 'model': joblib.load(f"{MODEL_DIR}/severity_model.joblib"),
-                'le': joblib.load(f"{MODEL_DIR}/le_severity.joblib")
+                'le': joblib.load(f"{MODEL_DIR}/leSeverity.joblib")
             }
         }, {
-            'diagnosis': joblib.load(f"{MODEL_DIR}/trained_X_columns_diagnosis.joblib"),
-            'management': joblib.load(f"{MODEL_DIR}/trained_X_columns_management.joblib"),
-            'severity': joblib.load(f"{MODEL_DIR}/trained_X_columns_severity.joblib")
-        }, joblib.load(f"{MODEL_DIR}/original_df_columns.joblib")
+            'diagnosis': joblib.load(f"{MODEL_DIR}/trained_X_col_diagnosis.joblib"),
+            'management': joblib.load(f"{MODEL_DIR}/trained_X_col_management.joblib"),
+            'severity': joblib.load(f"{MODEL_DIR}/trained_X_col_severity.joblib")
+        }, joblib.load(f"{MODEL_DIR}/df_columns_origin.joblib")
     except Exception as e:
         sys.exit(f"Erro ao carregar modelos: {e}")
 
